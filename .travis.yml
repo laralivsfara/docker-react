@@ -9,8 +9,7 @@ before_install: # install before deplyy the project or test run ... build docker
 # after chp 94 
 # run the 
 script:
-    - docker run -e CI=true lara.codes/docker-react npm run test
-    language: generic 
+    - docker run -e CI=true lara.codes/docker-react npm run test 
 
 # if an exit code -ne 0 then test fails
 # now npm run test ... never exists and travis ci requires taht it exits 
