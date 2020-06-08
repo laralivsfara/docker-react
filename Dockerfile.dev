@@ -1,0 +1,19 @@
+# this is used for a dev enviroment
+
+# to run the .dev file we need to use this 
+
+# docker build -f Dockerfile.dev . 
+# remove the node modules since we where moving the 
+# depenedcies
+
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install 
+
+COPY . .
+
+CMD ["npm", "run", "start"]

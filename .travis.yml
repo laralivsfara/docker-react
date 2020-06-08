@@ -1,0 +1,17 @@
+sudo: required  # run as root
+services: # what service es should it run
+    - docker  # travis will download 
+
+before_install: # install before deplyy the project or test run ... build docker now 
+    - docker build -t lara.codes/docker-react -f Dockerfile.dev . 
+    # usally we needed the id but we are going to tag it 
+
+# after chp 94 
+# run the 
+script:
+    - docker run -e CI=true lara.codes/docker-react npm run test
+    language: generic 
+
+# if an exit code -ne 0 then test fails
+# now npm run test ... never exists and travis ci requires taht it exits 
+# so the ci= true ->  tests will only run once instead of launching the watcher.
