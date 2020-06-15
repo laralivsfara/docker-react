@@ -3,4 +3,31 @@ services: # what service es should it run
     - docker  # travis will download 
 
 before_install: # install before deplyy the project or test run ... build docker now 
-    - docker build -f Dockerfile.dev . 
+    - docker build -t lara.codes/docker-react -f Dockerfile.dev . 
+    # usally we needed the id but we are going to tag it 
+
+# after chp 94 
+# run the 
+script:
+    - docker run -e CI=true lara.codes/docker-react npm run test 
+
+# if an exit code -ne 0 then test fails
+# now npm run test ... never exists and travis ci requires taht it exits 
+# so the ci= true ->  tests will only run once instead of launching the watcher.
+
+# deploy:
+#     provider: elasticbeanstalk
+#     region: # <<elasticbeanstalk instance from url like us-west-2 >>
+#     app: # <<application name in the application >>
+#     env: # << -env name in aws >>
+#     bucket_name: # name of the s3 bucket where travis ci will place it 
+#                 # search s3  and find elasitcbeanstalk-env- 
+#     bucket_path: # folder inside the bucket which is the name of the project
+#                  # use the appname ! 
+    #   on:
+    #     branch: master 
+    # access_key_id: $AWS_ACCESS_KEY
+    # secret_access_key: $AWS_SECRET_KEY
+
+    
+
