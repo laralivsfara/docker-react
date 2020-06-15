@@ -1,0 +1,6 @@
+sudo: required  # run as root
+services: # what service es should it run
+    - docker  # travis will download 
+
+before_install: # install before deplyy the project or test run ... build docker now 
+    - docker build -f Dockerfile.dev . 
